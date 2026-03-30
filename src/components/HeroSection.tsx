@@ -9,6 +9,7 @@ const HeroSection = () => {
         <div className="flex justify-center mb-8">
           <img src={heroBookshelf} alt="Cozy pixel art bookshelf" width={1280} height={512} className="max-w-2xl w-full h-auto" />
         </div>
+        <div className="text-center mb-8">
           <h1 className="font-pixel text-lg sm:text-xl text-pixel-brown pixel-text-shadow mb-4">
             📚 Featured Books
           </h1>
