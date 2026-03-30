@@ -1,10 +1,14 @@
 import { Star, TrendingUp, BookOpen } from "lucide-react";
+import heroBookshelf from "@/assets/hero-bookshelf.png";
 
 const HeroSection = () => {
   return (
     <section className="cozy-gradient py-16 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-8">
+        {/* Hero Image */}
+        <div className="flex justify-center mb-8">
+          <img src={heroBookshelf} alt="Cozy pixel art bookshelf" width={1280} height={512} className="max-w-2xl w-full h-auto" />
+        </div>
           <h1 className="font-pixel text-lg sm:text-xl text-pixel-brown pixel-text-shadow mb-4">
             📚 Featured Books
           </h1>
