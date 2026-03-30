@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const GENRES = [
-  { id: "fantasy", label: "🧙 Fantasy", emoji: "🐉" },
-  { id: "romance", label: "💕 Romance", emoji: "🌹" },
-  { id: "scifi", label: "🚀 Sci-Fi", emoji: "🛸" },
-  { id: "thriller", label: "🔪 Polar/Thriller", emoji: "🕵️" },
-  { id: "horror", label: "👻 Horror", emoji: "🎃" },
-  { id: "historical", label: "🏛️ Historical", emoji: "📜" },
-  { id: "manga", label: "🎌 Manga", emoji: "⛩️" },
-  { id: "poetry", label: "🪶 Poetry", emoji: "🌸" },
-  { id: "adventure", label: "⚔️ Adventure", emoji: "🗺️" },
-  { id: "comedy", label: "😂 Comedy", emoji: "🎭" },
-  { id: "mystery", label: "🔍 Mystery", emoji: "🕯️" },
-  { id: "nonfiction", label: "📰 Non-Fiction", emoji: "🎓" },
+  { id: "fantasy", label: "Fantasy", icon: "🧙" },
+  { id: "romance", label: "Romance", icon: "💕" },
+  { id: "scifi", label: "Sci-Fi", icon: "🚀" },
+  { id: "thriller", label: "Thriller", icon: "🔪" },
+  { id: "horror", label: "Horror", icon: "👻" },
+  { id: "historical", label: "Historical", icon: "🏛️" },
+  { id: "manga", label: "Manga", icon: "🎌" },
+  { id: "poetry", label: "Poetry", icon: "🪶" },
+  { id: "adventure", label: "Adventure", icon: "⚔️" },
+  { id: "comedy", label: "Comedy", icon: "😂" },
+  { id: "mystery", label: "Mystery", icon: "🔍" },
+  { id: "nonfiction", label: "Non-Fiction", icon: "📰" },
 ];
 
 interface PreferencesModalProps {
@@ -30,50 +31,50 @@ const PreferencesModal = ({ onComplete }: PreferencesModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-pixel-dark/60">
-      <div className="pixel-border bg-pixel-cream w-full max-w-lg mx-4">
-        <div className="bg-pixel-green px-4 py-3 border-b-4 border-pixel-dark">
-          <span className="font-pixel text-[10px] text-pixel-cream pixel-text-shadow">
-            ✨ Choose Your Genres
-          </span>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-foreground/40 backdrop-blur-sm">
+      <div className="bg-card w-full max-w-lg mx-4 rounded-2xl elegant-shadow-lg overflow-hidden animate-fade-up">
+        <div className="px-6 py-8 text-center border-b border-border">
+          <div className="inline-flex items-center gap-2 bg-accent/20 text-accent-foreground px-4 py-1.5 rounded-full text-xs font-medium mb-4">
+            <Sparkles size={14} />
+            Personalize your experience
+          </div>
+          <h2 className="font-display text-2xl font-bold text-foreground">
+            What do you love to read?
+          </h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            Select your favorite genres for personalized recommendations
+          </p>
         </div>
 
-        <div className="p-6 space-y-4">
-          <p className="font-pixel-body text-xl text-center text-pixel-dark">
-            What kind of stories do you love? Pick your favorites!
-          </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div className="p-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
             {GENRES.map((genre) => (
               <button
                 key={genre.id}
                 onClick={() => toggleGenre(genre.id)}
-                className={`pixel-border-sm p-3 font-pixel text-[8px] leading-relaxed transition-all ${
+                className={`relative flex items-center gap-2.5 p-3 rounded-xl border-2 text-sm font-medium transition-all duration-200 ${
                   selected.includes(genre.id)
-                    ? "bg-pixel-amber text-pixel-dark scale-105"
-                    : "bg-pixel-beige text-pixel-dark hover:bg-pixel-amber/30"
+                    ? "border-primary bg-primary/5 text-foreground shadow-sm"
+                    : "border-border bg-background text-muted-foreground hover:border-primary/30 hover:bg-muted"
                 }`}
               >
-                <div className="text-2xl mb-1">{genre.emoji}</div>
+                <span className="text-lg">{genre.icon}</span>
                 {genre.label}
+                {selected.includes(genre.id) && (
+                  <Check size={14} className="absolute top-2 right-2 text-primary" />
+                )}
               </button>
             ))}
           </div>
 
-          <div className="flex gap-3 pt-2">
-            <button
-              onClick={onComplete}
-              className="flex-1 pixel-btn bg-pixel-amber text-pixel-dark font-pixel text-[10px] flex items-center justify-center gap-2"
-            >
+          <div className="flex gap-3">
+            <Button onClick={onComplete} size="lg" className="flex-1">
               <Sparkles size={16} />
-              Start Reading! ({selected.length} selected)
-            </button>
-            <button
-              onClick={onComplete}
-              className="pixel-btn bg-muted text-muted-foreground font-pixel text-[8px]"
-            >
+              Get Recommendations {selected.length > 0 && `(${selected.length})`}
+            </Button>
+            <Button variant="ghost" onClick={onComplete} size="lg">
               Skip
-            </button>
+            </Button>
           </div>
         </div>
       </div>
