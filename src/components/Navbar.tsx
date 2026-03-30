@@ -1,84 +1,102 @@
 import { useState } from "react";
-import { Book, ChevronDown, Home, Library, Wallet, Users, HelpCircle, Info, Trophy } from "lucide-react";
+import { ChevronDown, Home, Library, Wallet, Users, HelpCircle, Info, Trophy, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [moreOpen, setMoreOpen] = useState(false);
-  const [challengesOpen, setChallengesOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-pixel-brown pixel-border-sm">
-      <div className="container mx-auto flex items-center justify-between px-4 py-2">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <span className="text-2xl">📚</span>
-          <span className="font-pixel text-xs text-pixel-cream pixel-text-shadow">
+          <span className="font-display text-xl font-bold text-foreground tracking-tight">
             Book Warm
           </span>
         </div>
 
-        {/* Nav Links */}
-        <div className="flex items-center gap-1">
-          <a href="#" className="pixel-btn bg-pixel-amber text-pixel-dark font-pixel text-[10px] flex items-center gap-2">
-            <Home size={14} />
-            Homepage
-          </a>
-          <a href="#" className="pixel-btn bg-pixel-green text-pixel-cream font-pixel text-[10px] flex items-center gap-2">
-            <Library size={14} />
-            My Library
-          </a>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-1">
+          <NavItem icon={<Home size={16} />} label="Homepage" active />
+          <NavItem icon={<Library size={16} />} label="My Library" />
 
           {/* More Dropdown */}
           <div className="relative">
             <button
               onClick={() => setMoreOpen(!moreOpen)}
-              className="pixel-btn bg-pixel-beige text-pixel-dark font-pixel text-[10px] flex items-center gap-2"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
             >
               More
-              <ChevronDown size={14} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
+              <ChevronDown size={14} className={`transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`} />
             </button>
 
             {moreOpen && (
-              <div className="absolute right-0 top-full mt-1 w-56 pixel-border bg-pixel-cream z-50">
-                <MenuItem icon={<Wallet size={16} />} label="My Pocket" />
-                <MenuItem icon={<Users size={16} />} label="Community" />
-                <MenuItem icon={<HelpCircle size={16} />} label="FAQ" />
-                <MenuItem icon={<Info size={16} />} label="About Us" />
-                
-                {/* Challenges submenu */}
-                <div className="relative">
-                  <button
-                    onClick={() => setChallengesOpen(!challengesOpen)}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-lg font-pixel-body text-pixel-dark hover:bg-pixel-beige border-b-2 border-pixel-dark/20"
-                  >
-                    <Trophy size={16} />
-                    Challenges
-                    <ChevronDown size={12} className={`ml-auto transition-transform ${challengesOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {challengesOpen && (
-                    <div className="bg-pixel-beige border-t-2 border-pixel-dark/20">
-                      <button className="w-full text-left px-8 py-2 text-base font-pixel-body text-pixel-dark hover:bg-pixel-amber/30">
-                        ⚔️ Daily Challenges
-                      </button>
-                      <button className="w-full text-left px-8 py-2 text-base font-pixel-body text-pixel-dark hover:bg-pixel-amber/30">
-                        🏰 Monthly Quests
-                      </button>
-                    </div>
-                  )}
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setMoreOpen(false)} />
+                <div className="absolute right-0 top-full mt-2 w-60 bg-card border border-border rounded-xl elegant-shadow-lg z-50 py-2 overflow-hidden">
+                  <DropdownItem icon={<Wallet size={16} />} label="My Pocket" desc="Your points wallet" />
+                  <DropdownItem icon={<Users size={16} />} label="Community" desc="Group discussions" />
+                  <DropdownItem icon={<HelpCircle size={16} />} label="FAQ" desc="Common questions" />
+                  <DropdownItem icon={<Info size={16} />} label="About Us" desc="Contact & socials" />
+                  <div className="border-t border-border my-1" />
+                  <DropdownItem icon={<Trophy size={16} />} label="Daily Challenges" desc="New every day" />
+                  <DropdownItem icon={<Trophy size={16} />} label="Monthly Quests" desc="Big rewards" />
                 </div>
-              </div>
+              </>
             )}
           </div>
         </div>
+
+        {/* Mobile toggle */}
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 hover:bg-muted rounded-lg">
+          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-border bg-card px-6 py-4 space-y-1">
+          <MobileItem icon={<Home size={16} />} label="Homepage" />
+          <MobileItem icon={<Library size={16} />} label="My Library" />
+          <MobileItem icon={<Wallet size={16} />} label="My Pocket" />
+          <MobileItem icon={<Users size={16} />} label="Community" />
+          <MobileItem icon={<HelpCircle size={16} />} label="FAQ" />
+          <MobileItem icon={<Info size={16} />} label="About Us" />
+          <MobileItem icon={<Trophy size={16} />} label="Challenges" />
+        </div>
+      )}
     </nav>
   );
 };
 
-const MenuItem = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <button className="w-full flex items-center gap-3 px-4 py-3 text-lg font-pixel-body text-pixel-dark hover:bg-pixel-beige border-b-2 border-pixel-dark/20 transition-colors">
+const NavItem = ({ icon, label, active }: { icon: React.ReactNode; label: string; active?: boolean }) => (
+  <a
+    href="#"
+    className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+      active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted"
+    }`}
+  >
     {icon}
     {label}
+  </a>
+);
+
+const DropdownItem = ({ icon, label, desc }: { icon: React.ReactNode; label: string; desc: string }) => (
+  <button className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-muted transition-colors text-left">
+    <span className="text-muted-foreground">{icon}</span>
+    <div>
+      <div className="text-sm font-medium text-foreground">{label}</div>
+      <div className="text-xs text-muted-foreground">{desc}</div>
+    </div>
   </button>
+);
+
+const MobileItem = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
+  <a href="#" className="flex items-center gap-3 px-3 py-2.5 text-sm text-foreground hover:bg-muted rounded-lg transition-colors">
+    {icon}
+    {label}
+  </a>
 );
 
 export default Navbar;

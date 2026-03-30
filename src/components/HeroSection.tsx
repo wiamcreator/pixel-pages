@@ -1,97 +1,92 @@
-import { Star, TrendingUp, BookOpen } from "lucide-react";
+import { Star, TrendingUp, Award, BookOpen, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import heroBookshelf from "@/assets/hero-bookshelf.png";
 
 const HeroSection = () => {
   return (
-    <section className="cozy-gradient py-16 px-4">
+    <section className="hero-gradient py-20 px-4">
       <div className="container mx-auto">
-        {/* Hero Image */}
-        <div className="flex justify-center mb-8">
-          <img src={heroBookshelf} alt="Cozy pixel art bookshelf" width={1280} height={512} className="max-w-2xl w-full h-auto" />
-        </div>
-        <div className="text-center mb-8">
-          <h1 className="font-pixel text-lg sm:text-xl text-pixel-brown pixel-text-shadow mb-4">
-            📚 Featured Books
+        {/* Hero */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 bg-accent/15 text-accent-foreground px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border border-accent/20">
+            <TrendingUp size={14} />
+            Trending this week
+          </div>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-4">
+            Discover stories that <em className="text-primary">warm your soul</em>
           </h1>
-          <p className="font-pixel-body text-2xl text-muted-foreground">
-            The most loved stories of the moment
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Curated recommendations, community reviews, and your personal AI reading companion — all in one cozy place.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Most Read */}
-          <div className="pixel-border bg-pixel-cream p-6 relative">
-            <div className="absolute -top-3 -left-1 bg-pixel-amber px-3 py-1 pixel-border-sm">
-              <span className="font-pixel text-[8px] text-pixel-dark flex items-center gap-1">
-                <TrendingUp size={12} /> MOST READ
-              </span>
-            </div>
-            <div className="flex gap-4 mt-4">
-              <div className="w-28 h-40 bg-pixel-green pixel-border-sm flex items-center justify-center shrink-0">
-                <BookOpen size={32} className="text-pixel-cream" />
-              </div>
-              <div>
-                <h3 className="font-pixel text-[10px] text-pixel-brown mb-2">
-                  The Enchanted Forest
-                </h3>
-                <p className="font-pixel-body text-lg text-foreground mb-2">
-                  by Elara Nightwood
-                </p>
-                <p className="font-pixel-body text-base text-muted-foreground mb-3">
-                  "A magical journey through ancient woods where every tree tells a story..."
-                </p>
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className={i <= 4 ? "text-pixel-amber fill-pixel-amber" : "text-muted fill-muted"}
-                    />
-                  ))}
-                  <span className="font-pixel text-[8px] text-muted-foreground ml-2">4.8/5</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Most Popular */}
-          <div className="pixel-border bg-pixel-cream p-6 relative">
-            <div className="absolute -top-3 -left-1 bg-pixel-green px-3 py-1 pixel-border-sm">
-              <span className="font-pixel text-[8px] text-pixel-cream flex items-center gap-1">
-                <Star size={12} /> MOST POPULAR
-              </span>
-            </div>
-            <div className="flex gap-4 mt-4">
-              <div className="w-28 h-40 bg-pixel-brown pixel-border-sm flex items-center justify-center shrink-0">
-                <BookOpen size={32} className="text-pixel-cream" />
-              </div>
-              <div>
-                <h3 className="font-pixel text-[10px] text-pixel-brown mb-2">
-                  Stardust & Swords
-                </h3>
-                <p className="font-pixel-body text-lg text-foreground mb-2">
-                  by Marcus Thorne
-                </p>
-                <p className="font-pixel-body text-base text-muted-foreground mb-3">
-                  "An epic tale of heroes who battle cosmic forces to save their realm..."
-                </p>
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className={i <= 5 ? "text-pixel-amber fill-pixel-amber" : "text-muted fill-muted"}
-                    />
-                  ))}
-                  <span className="font-pixel text-[8px] text-muted-foreground ml-2">4.9/5</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Featured Books */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <FeaturedCard
+            badge="Most Read"
+            badgeIcon={<TrendingUp size={12} />}
+            badgeColor="bg-accent text-accent-foreground"
+            title="The Enchanted Forest"
+            author="Elara Nightwood"
+            description="A magical journey through ancient woods where every tree tells a story and every path leads to wonder."
+            rating={4.8}
+            coverColor="bg-secondary"
+          />
+          <FeaturedCard
+            badge="Editor's Pick"
+            badgeIcon={<Award size={12} />}
+            badgeColor="bg-primary text-primary-foreground"
+            title="Stardust & Swords"
+            author="Marcus Thorne"
+            description="An epic tale of heroes who battle cosmic forces to save their realm from eternal darkness."
+            rating={4.9}
+            coverColor="bg-warm-700"
+          />
         </div>
       </div>
     </section>
   );
 };
+
+interface FeaturedCardProps {
+  badge: string;
+  badgeIcon: React.ReactNode;
+  badgeColor: string;
+  title: string;
+  author: string;
+  description: string;
+  rating: number;
+  coverColor: string;
+}
+
+const FeaturedCard = ({ badge, badgeIcon, badgeColor, title, author, description, rating, coverColor }: FeaturedCardProps) => (
+  <div className="glass-card p-6 group hover:scale-[1.01] transition-transform duration-300">
+    <div className="flex gap-5">
+      <div className={`${coverColor} w-28 h-40 rounded-lg flex items-center justify-center shrink-0 elegant-shadow`}>
+        <BookOpen size={28} className="text-primary-foreground/80" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <span className={`inline-flex items-center gap-1 ${badgeColor} px-2.5 py-1 rounded-full text-[11px] font-semibold mb-3`}>
+          {badgeIcon}
+          {badge}
+        </span>
+        <h3 className="font-display text-lg font-bold text-foreground mb-1">{title}</h3>
+        <p className="text-sm text-muted-foreground mb-2">by {author}</p>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-3 line-clamp-2">{description}</p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <Star key={i} size={14} className={i <= Math.floor(rating) ? "text-accent fill-accent" : "text-muted"} />
+            ))}
+            <span className="text-xs text-muted-foreground ml-1 font-medium">{rating}</span>
+          </div>
+          <Button variant="ghost" size="sm" className="text-primary text-xs gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            Read <ArrowRight size={12} />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 export default HeroSection;

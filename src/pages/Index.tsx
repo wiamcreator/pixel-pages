@@ -15,7 +15,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Login popup */}
       {step === "login" && (
         <LoginPopup
           onClose={() => setStep("preferences")}
@@ -23,35 +22,35 @@ const Index = () => {
         />
       )}
 
-      {/* Preferences modal */}
       {step === "preferences" && (
         <PreferencesModal onComplete={() => setStep("home")} />
       )}
 
-      {/* Main content */}
       <main className="pt-16">
         <HeroSection />
         <BookGrid />
 
-        {/* Footer */}
-        <footer className="bg-pixel-brown py-8 px-4 border-t-4 border-pixel-dark">
-          <div className="container mx-auto text-center space-y-3">
-            <span className="font-pixel text-sm text-pixel-cream pixel-text-shadow">
-              📚 Book Warm
-            </span>
-            <p className="font-pixel-body text-lg text-pixel-beige">
-              Your cozy corner of the digital library • Made with 🦉 & ☕
-            </p>
-            <div className="flex justify-center gap-4">
-              <a href="#" className="font-pixel-body text-base text-pixel-amber hover:underline">Instagram</a>
-              <a href="#" className="font-pixel-body text-base text-pixel-amber hover:underline">Contact</a>
-              <a href="#" className="font-pixel-body text-base text-pixel-amber hover:underline">© 2026</a>
+        <footer className="bg-warm-700 py-10 px-4">
+          <div className="container mx-auto text-center space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-xl">📚</span>
+              <span className="font-display text-lg font-bold text-primary-foreground">
+                Book Warm
+              </span>
             </div>
+            <p className="text-primary-foreground/60 text-sm">
+              Your cozy corner of the digital library
+            </p>
+            <div className="flex justify-center gap-6">
+              <a href="#" className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors">Instagram</a>
+              <a href="#" className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors">Contact</a>
+              <a href="#" className="text-sm text-primary-foreground/50 hover:text-primary-foreground transition-colors">Privacy</a>
+            </div>
+            <p className="text-primary-foreground/30 text-xs">© 2026 Book Warm. All rights reserved.</p>
           </div>
         </footer>
       </main>
 
-      {/* AI Chatbot */}
       <BookOwlChat />
     </div>
   );
