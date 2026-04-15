@@ -43,8 +43,8 @@ const Navbar = () => {
                   <DropdownItem icon={<HelpCircle size={16} />} label="FAQ" desc="Common questions" />
                   <DropdownItem icon={<Info size={16} />} label="About Us" desc="Contact & socials" />
                   <div className="border-t border-border my-1" />
-                  <DropdownItem icon={<Trophy size={16} />} label="Daily Challenges" desc="New every day" />
-                  <DropdownItem icon={<Trophy size={16} />} label="Monthly Quests" desc="Big rewards" />
+                  <DropdownItem icon={<Trophy size={16} />} label="Daily Challenges" desc="New every day" onClick={() => { navigate("/challenges"); setMoreOpen(false); }} />
+                  <DropdownItem icon={<Trophy size={16} />} label="Monthly Quests" desc="Big rewards" onClick={() => { navigate("/challenges"); setMoreOpen(false); }} />
                 </div>
               </>
             )}
@@ -85,8 +85,8 @@ const NavItem = ({ icon, label, active, onClick }: { icon: React.ReactNode; labe
   </button>
 );
 
-const DropdownItem = ({ icon, label, desc }: { icon: React.ReactNode; label: string; desc: string }) => (
-  <button className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-muted transition-colors text-left">
+const DropdownItem = ({ icon, label, desc, onClick }: { icon: React.ReactNode; label: string; desc: string; onClick?: () => void }) => (
+  <button onClick={onClick} className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-muted transition-colors text-left">
     <span className="text-muted-foreground">{icon}</span>
     <div>
       <div className="text-sm font-medium text-foreground">{label}</div>
