@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronDown, Home, Library, Wallet, Users, HelpCircle, Info, Trophy, Menu, X } from "lucide-react";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [moreOpen, setMoreOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -18,8 +21,8 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
-          <NavItem icon={<Home size={16} />} label="Homepage" active />
-          <NavItem icon={<Library size={16} />} label="My Library" />
+          <NavItem icon={<Home size={16} />} label="Homepage" active={location.pathname === "/"} onClick={() => navigate("/")} />
+          <NavItem icon={<Library size={16} />} label="My Library" active={location.pathname === "/my-library"} onClick={() => navigate("/my-library")} />
 
           {/* More Dropdown */}
           <div className="relative">
@@ -70,16 +73,16 @@ const Navbar = () => {
   );
 };
 
-const NavItem = ({ icon, label, active }: { icon: React.ReactNode; label: string; active?: boolean }) => (
-  <a
-    href="#"
+const NavItem = ({ icon, label, active, onClick }: { icon: React.ReactNode; label: string; active?: boolean; onClick?: () => void }) => (
+  <button
+    onClick={onClick}
     className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
       active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-muted"
     }`}
   >
     {icon}
     {label}
-  </a>
+  </button>
 );
 
 const DropdownItem = ({ icon, label, desc }: { icon: React.ReactNode; label: string; desc: string }) => (
@@ -92,11 +95,11 @@ const DropdownItem = ({ icon, label, desc }: { icon: React.ReactNode; label: str
   </button>
 );
 
-const MobileItem = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <a href="#" className="flex items-center gap-3 px-3 py-2.5 text-sm text-foreground hover:bg-muted rounded-lg transition-colors">
+const MobileItem = ({ icon, label, onClick }: { icon: React.ReactNode; label: string; onClick?: () => void }) => (
+  <button onClick={onClick} className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-foreground hover:bg-muted rounded-lg transition-colors">
     {icon}
     {label}
-  </a>
+  </button>
 );
 
 export default Navbar;
