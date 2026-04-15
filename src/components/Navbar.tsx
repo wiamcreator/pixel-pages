@@ -60,8 +60,8 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-card px-6 py-4 space-y-1">
-          <MobileItem icon={<Home size={16} />} label="Homepage" />
-          <MobileItem icon={<Library size={16} />} label="My Library" />
+          <MobileItem icon={<Home size={16} />} label="Homepage" onClick={() => { navigate("/"); setMobileOpen(false); }} />
+          <MobileItem icon={<Library size={16} />} label="My Library" onClick={() => { navigate("/my-library"); setMobileOpen(false); }} />
           <MobileItem icon={<Wallet size={16} />} label="My Pocket" />
           <MobileItem icon={<Users size={16} />} label="Community" />
           <MobileItem icon={<HelpCircle size={16} />} label="FAQ" />
