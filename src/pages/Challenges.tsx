@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Flame, Trophy, Clock, CheckCircle2, Lock, Star, BookOpen, Target, Zap } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -81,7 +81,8 @@ const ChallengeCard = ({ challenge }: { challenge: Challenge }) => {
 
 const Challenges = () => {
   const navigate = useNavigate();
-
+  const [searchParams] = useSearchParams();
+  const defaultTab = searchParams.get("tab") === "monthly" ? "monthly" : "daily";
   const dailyCompleted = DAILY_CHALLENGES.filter(c => c.status === "completed").length;
   const monthlyCompleted = MONTHLY_CHALLENGES.filter(c => c.status === "completed").length;
 
@@ -104,7 +105,7 @@ const Challenges = () => {
           </div>
           <p className="text-muted-foreground mb-8">Complete reading challenges to earn points and rewards</p>
 
-          <Tabs defaultValue="daily" className="w-full">
+          <Tabs defaultValue={defaultTab} className="w-full">
             <TabsList className="bg-muted/60 mb-6">
               <TabsTrigger value="daily" className="gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 <Flame size={14} /> Daily ({dailyCompleted}/{DAILY_CHALLENGES.length})

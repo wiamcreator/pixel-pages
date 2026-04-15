@@ -43,8 +43,8 @@ const Navbar = () => {
                   <DropdownItem icon={<HelpCircle size={16} />} label="FAQ" desc="Common questions" />
                   <DropdownItem icon={<Info size={16} />} label="About Us" desc="Contact & socials" />
                   <div className="border-t border-border my-1" />
-                  <DropdownItem icon={<Trophy size={16} />} label="Daily Challenges" desc="New every day" onClick={() => { navigate("/challenges"); setMoreOpen(false); }} />
-                  <DropdownItem icon={<Trophy size={16} />} label="Monthly Quests" desc="Big rewards" onClick={() => { navigate("/challenges"); setMoreOpen(false); }} />
+                  <DropdownItem icon={<Trophy size={16} />} label="Daily Challenges" desc="New every day" onClick={() => { navigate("/challenges?tab=daily"); setMoreOpen(false); }} />
+                  <DropdownItem icon={<Trophy size={16} />} label="Monthly Quests" desc="Big rewards" onClick={() => { navigate("/challenges?tab=monthly"); setMoreOpen(false); }} />
                 </div>
               </>
             )}
