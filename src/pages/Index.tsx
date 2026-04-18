@@ -30,7 +30,7 @@ const Index = () => {
       )}
 
       {step === "preferences" && (
-        <PreferencesModal onComplete={() => setStep("home")} />
+        <PreferencesModal onComplete={completeOnboarding} />
       )}
 
       <main className="pt-16">
