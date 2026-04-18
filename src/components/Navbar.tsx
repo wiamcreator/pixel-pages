@@ -38,10 +38,10 @@ const Navbar = () => {
               <>
                 <div className="fixed inset-0 z-40" onClick={() => setMoreOpen(false)} />
                 <div className="absolute right-0 top-full mt-2 w-60 bg-card border border-border rounded-xl elegant-shadow-lg z-50 py-2 overflow-hidden">
-                  <DropdownItem icon={<Wallet size={16} />} label="My Pocket" desc="Your points wallet" />
+                  <DropdownItem icon={<Wallet size={16} />} label="My Pocket" desc="Your points wallet" onClick={() => { navigate("/my-pocket"); setMoreOpen(false); }} />
                   <DropdownItem icon={<Users size={16} />} label="Community" desc="Group discussions" />
-                  <DropdownItem icon={<HelpCircle size={16} />} label="FAQ" desc="Common questions" />
-                  <DropdownItem icon={<Info size={16} />} label="About Us" desc="Contact & socials" />
+                  <DropdownItem icon={<HelpCircle size={16} />} label="FAQ" desc="Common questions" onClick={() => { navigate("/faq"); setMoreOpen(false); }} />
+                  <DropdownItem icon={<Info size={16} />} label="About Us" desc="Contact & socials" onClick={() => { navigate("/about"); setMoreOpen(false); }} />
                   <div className="border-t border-border my-1" />
                   <DropdownItem icon={<Trophy size={16} />} label="Daily Challenges" desc="New every day" onClick={() => { navigate("/challenges?tab=daily"); setMoreOpen(false); }} />
                   <DropdownItem icon={<Trophy size={16} />} label="Monthly Quests" desc="Big rewards" onClick={() => { navigate("/challenges?tab=monthly"); setMoreOpen(false); }} />
@@ -62,11 +62,11 @@ const Navbar = () => {
         <div className="md:hidden border-t border-border bg-card px-6 py-4 space-y-1">
           <MobileItem icon={<Home size={16} />} label="Homepage" onClick={() => { navigate("/"); setMobileOpen(false); }} />
           <MobileItem icon={<Library size={16} />} label="My Library" onClick={() => { navigate("/my-library"); setMobileOpen(false); }} />
-          <MobileItem icon={<Wallet size={16} />} label="My Pocket" />
+          <MobileItem icon={<Wallet size={16} />} label="My Pocket" onClick={() => { navigate("/my-pocket"); setMobileOpen(false); }} />
           <MobileItem icon={<Users size={16} />} label="Community" />
-          <MobileItem icon={<HelpCircle size={16} />} label="FAQ" />
-          <MobileItem icon={<Info size={16} />} label="About Us" />
-          <MobileItem icon={<Trophy size={16} />} label="Challenges" />
+          <MobileItem icon={<HelpCircle size={16} />} label="FAQ" onClick={() => { navigate("/faq"); setMobileOpen(false); }} />
+          <MobileItem icon={<Info size={16} />} label="About Us" onClick={() => { navigate("/about"); setMobileOpen(false); }} />
+          <MobileItem icon={<Trophy size={16} />} label="Challenges" onClick={() => { navigate("/challenges"); setMobileOpen(false); }} />
         </div>
       )}
     </nav>

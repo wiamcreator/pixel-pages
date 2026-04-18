@@ -81,7 +81,7 @@ const MyPocket = () => {
                       <span className="text-xs text-muted-foreground">{date}</span>
                     </div>
                   </div>
-                  <div className="font-bold text-emerald-600 dark:text-emerald-400 shrink-0">
+                  <div className="font-bold text-primary shrink-0">
                     +{amount}
                   </div>
                 </div>
