@@ -9,7 +9,14 @@ import BookOwlChat from "@/components/BookOwlChat";
 type Step = "login" | "preferences" | "home";
 
 const Index = () => {
-  const [step, setStep] = useState<Step>("login");
+  const [step, setStep] = useState<Step>(() => {
+    return (localStorage.getItem("bookwarm-onboarded") === "true" ? "home" : "login");
+  });
+
+  const completeOnboarding = () => {
+    localStorage.setItem("bookwarm-onboarded", "true");
+    setStep("home");
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -23,7 +30,7 @@ const Index = () => {
       )}
 
       {step === "preferences" && (
-        <PreferencesModal onComplete={() => setStep("home")} />
+        <PreferencesModal onComplete={completeOnboarding} />
       )}
 
       <main className="pt-16">
