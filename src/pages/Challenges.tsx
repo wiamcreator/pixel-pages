@@ -81,8 +81,8 @@ const ChallengeCard = ({ challenge }: { challenge: Challenge }) => {
 
 const Challenges = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const defaultTab = searchParams.get("tab") === "monthly" ? "monthly" : "daily";
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentTab = searchParams.get("tab") === "monthly" ? "monthly" : "daily";
   const dailyCompleted = DAILY_CHALLENGES.filter(c => c.status === "completed").length;
   const monthlyCompleted = MONTHLY_CHALLENGES.filter(c => c.status === "completed").length;
 
