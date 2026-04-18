@@ -9,6 +9,7 @@ import Challenges from "./pages/Challenges.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import FAQ from "./pages/FAQ.tsx";
 import MyPocket from "./pages/MyPocket.tsx";
+import Community from "./pages/Community.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/about" element={<AboutUs />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/my-pocket" element={<MyPocket />} />
+          <Route path="/community" element={<Community />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
