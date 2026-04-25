@@ -1,13 +1,24 @@
-import { Star, TrendingUp, Award, BookOpen, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Star, TrendingUp, Award, BookOpen, ArrowRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBookshelf from "@/assets/hero-bookshelf.png";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onSearch: (query: string) => void;
+}
+
+const HeroSection = ({ onSearch }: HeroSectionProps) => {
+  const [query, setQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) onSearch(query.trim());
+  };
+
   return (
     <section className="hero-gradient py-20 px-4">
       <div className="container mx-auto">
         {/* Hero */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 bg-accent/15 text-accent-foreground px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border border-accent/20">
             <TrendingUp size={14} />
             Trending this week
@@ -15,9 +26,26 @@ const HeroSection = () => {
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-4">
             Discover stories that <em className="text-primary">warm your soul</em>
           </h1>
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="text-muted-foreground text-lg leading-relaxed mb-8">
             Curated recommendations, community reviews, and your personal AI reading companion — all in one cozy place.
           </p>
+
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="flex gap-2 max-w-lg mx-auto">
+            <div className="relative flex-1">
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search for a book or author..."
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
+            </div>
+            <Button type="submit" className="rounded-xl px-5">
+              Search
+            </Button>
+          </form>
         </div>
 
         {/* Featured Books */}

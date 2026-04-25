@@ -12,6 +12,7 @@ import MyPocket from "./pages/MyPocket.tsx";
 import Community from "./pages/Community.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/my-pocket" element={<MyPocket />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/book/:bookKey" element={<BookDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -37,3 +39,4 @@ const App = () => (
 );
 
 export default App;
+import BookDetail from "./pages/BookDetail.tsx";

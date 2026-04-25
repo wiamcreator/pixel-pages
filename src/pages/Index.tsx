@@ -13,6 +13,8 @@ const Index = () => {
     return (localStorage.getItem("bookwarm-onboarded") === "true" ? "home" : "login");
   });
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const completeOnboarding = () => {
     localStorage.setItem("bookwarm-onboarded", "true");
     setStep("home");
@@ -34,8 +36,8 @@ const Index = () => {
       )}
 
       <main className="pt-16">
-        <HeroSection />
-        <BookGrid />
+        <HeroSection onSearch={setSearchQuery} />
+        <BookGrid searchQuery={searchQuery} />
 
         <footer className="bg-warm-700 py-10 px-4">
           <div className="container mx-auto text-center space-y-4">
