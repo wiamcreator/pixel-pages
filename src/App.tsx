@@ -11,7 +11,8 @@ import FAQ from "./pages/FAQ.tsx";
 import MyPocket from "./pages/MyPocket.tsx";
 import Community from "./pages/Community.tsx";
 import NotFound from "./pages/NotFound.tsx";
-
+import BookDetail from "./pages/BookDetail.tsx";
+import { CartProvider } from "./context/CartContext.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,23 +21,23 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/my-library" element={<MyLibrary />} />
-          <Route path="/challenges" element={<Challenges />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/my-pocket" element={<MyPocket />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/book/:bookKey" element={<BookDetail />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/my-library" element={<MyLibrary />} />
+            <Route path="/challenges" element={<Challenges />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/my-pocket" element={<MyPocket />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/book/:bookKey" element={<BookDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
 
 export default App;
-import BookDetail from "./pages/BookDetail.tsx";
