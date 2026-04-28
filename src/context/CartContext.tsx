@@ -82,7 +82,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     <AppContext.Provider value={{
       cart, addToCart, removeFromCart, isInCart,
       readingList, finishedList, addToReading, updateProgress, isReading
-    }}>
+    }}> 
       {children}
     </AppContext.Provider>
   );
